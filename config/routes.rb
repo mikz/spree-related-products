@@ -1,5 +1,11 @@
-map.namespace :admin do |admin|
-  admin.resources :relation_types
-
-  admin.resources :products, :member => {:related => :get}, :has_many => [:relations]
+Rails.application.routes.draw do
+  namespace :admin do
+    resources :relation_types
+    resources :products do
+      resources :relations
+      member do
+        get :related
+      end
+    end
+  end
 end
